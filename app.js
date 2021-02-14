@@ -101,6 +101,7 @@ const createSlider = () => {
     if (duration < 0) {
         // crate slider previous next area
         alert("As value is less then zero, slider will not work,please try again thank you.");
+        document.querySelector('.main').style.display = 'none';
 
 
 
