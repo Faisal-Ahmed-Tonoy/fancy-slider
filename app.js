@@ -10,10 +10,6 @@ document.getElementById("search")
     .addEventListener("keypress", function(event) {
         if (event.key === 'Enter') {
             document.getElementById("search-btn").click();
-
-
-
-
         }
 
 
@@ -40,9 +36,6 @@ const showImages = (images) => {
         gallery.appendChild(div);
         toggleSpinner(false);
 
-
-
-
     })
 
 }
@@ -52,11 +45,15 @@ const getImages = (query) => {
     toggleSpinner(true);
 
 
+
+
     const KEY = '20265029-1a8ac9627f65dc27b61e8e4c2';
     fetch(`https://pixabay.com/api/?key=20265029-1a8ac9627f65dc27b61e8e4c2&q=${search}&image_type=photo&pretty=true`)
         .then(response => response.json())
         .then(data => showImages(data.hits))
-        .catch(error => displayError("Something Went wrong"));
+        .catch(error => displayError('Something Went Wrong!!! Please Try Again'));
+
+
 
 
 
@@ -73,7 +70,7 @@ const selectItem = (event, img) => {
     if (item === -1) {
         sliders.push(img);
     } else {
-        sliders.pop(img);
+        sliders.delete(img);
     }
 };
 
@@ -104,7 +101,6 @@ const createSlider = () => {
     if (duration < 0) {
         // crate slider previous next area
         alert("As value is less then zero, slider will not work,please try again thank you.");
-        document.querySelector('.main').style.display = 'none';
 
 
 
@@ -127,6 +123,7 @@ const createSlider = () => {
     // change slider index 
     const changeItem = index => {
         changeSlide(slideIndex += index);
+
     }
 
 }
@@ -164,7 +161,7 @@ searchBtn.addEventListener('click', function() {
 sliderBtn.addEventListener('click', function() {
     createSlider()
 })
-const toggleSpinner = show => {
+const toggleSpinner = (show) => {
     const spinner = document.getElementById('loading-spinner');
     if (show) {
         spinner.classList.remove('d-none');
