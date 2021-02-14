@@ -36,7 +36,7 @@ const showImages = (images) => {
         div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
         div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
         gallery.appendChild(div)
-        toggleSpinner();
+
 
     })
 
@@ -44,7 +44,7 @@ const showImages = (images) => {
 
 const getImages = (query) => {
     const search = document.getElementById('search').value;
-    toggleSpinner();
+
     const KEY = '20265029-1a8ac9627f65dc27b61e8e4c2';
     fetch(`https://pixabay.com/api/?key=20265029-1a8ac9627f65dc27b61e8e4c2&q=${search}&image_type=photo&pretty=true`)
         .then(response => response.json())
