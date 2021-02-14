@@ -11,6 +11,8 @@ document.getElementById("search")
         if (event.key === 'Enter') {
             document.getElementById("search-btn").click();
 
+
+
         }
 
     });
@@ -34,17 +36,22 @@ const showImages = (images) => {
         div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
         div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
         gallery.appendChild(div)
+        toggleSpinner();
+
     })
 
 }
 
 const getImages = (query) => {
     const search = document.getElementById('search').value;
+    toggleSpinner();
     const KEY = '20265029-1a8ac9627f65dc27b61e8e4c2';
     fetch(`https://pixabay.com/api/?key=20265029-1a8ac9627f65dc27b61e8e4c2&q=${search}&image_type=photo&pretty=true`)
         .then(response => response.json())
         .then(data => showImages(data.hits))
-        .catch(err => console.log(err))
+        .catch(error => displayError("Something Went wrong"));
+
+
 }
 
 let slideIndex = 0;
@@ -75,9 +82,9 @@ const createSlider = () => {
     const prevNext = document.createElement('div');
     prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
     prevNext.innerHTML = ` 
-  <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
-  <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
-  `;
+    <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
+    <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
+    `;
 
     sliderContainer.appendChild(prevNext)
     document.querySelector('.main').style.display = 'block';
