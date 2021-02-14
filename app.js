@@ -70,25 +70,37 @@ const createSlider = () => {
     // hide image aria
     imagesArea.style.display = 'none';
     const duration = document.getElementById('duration').value || 1000;
-    sliders.forEach(slide => {
-        let item = document.createElement('div')
-        item.className = "slider-item";
-        item.innerHTML = `<img class="w-100"
-    src="${slide}"
-    alt="">`;
-        sliderContainer.appendChild(item)
-    })
-    changeSlide(0)
-    timer = setInterval(function() {
-        slideIndex++;
-        changeSlide(slideIndex);
-    }, duration);
+
+    if (duration < 0) {
+        // crate slider previous next area
+        alert("As value is less then zero, slider will not work,please try again thank you.");
+        document.querySelector('.main').style.display = 'none';
+
+
+
+    } else {
+        sliders.forEach(slide => {
+            let item = document.createElement('div')
+            item.className = "slider-item";
+            item.innerHTML = `<img class="w-100"
+            src="${slide}"
+            alt="">`;
+            sliderContainer.appendChild(item)
+        })
+        changeSlide(0)
+        timer = setInterval(function() {
+            slideIndex++;
+            changeSlide(slideIndex);
+        }, duration);
+    }
+
+    // change slider index 
+    const changeItem = index => {
+        changeSlide(slideIndex += index);
+    }
+
 }
 
-// change slider index 
-const changeItem = index => {
-    changeSlide(slideIndex += index);
-}
 
 // change slide item
 const changeSlide = (index) => {
