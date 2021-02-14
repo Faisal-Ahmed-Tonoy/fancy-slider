@@ -42,7 +42,7 @@ const showImages = (images) => {
 
 const getImages = (query) => {
     const search = document.getElementById('search').value;
-    toggleSpinner(true);
+
 
 
 
@@ -52,6 +52,7 @@ const getImages = (query) => {
         .then(response => response.json())
         .then(data => showImages(data.hits))
         .catch(error => displayError('Something Went Wrong!!! Please Try Again'));
+    toggleSpinner(true);
 
 
 
@@ -86,11 +87,12 @@ const createSlider = () => {
     // crate slider previous next area
     sliderContainer.innerHTML = '';
     const prevNext = document.createElement('div');
-    prevNext.className = "prev-next d-flex w-100 justify-content-between align-items-center";
+    prevNext.className = "prev-next d-flex w-100  align-items-center";
     prevNext.innerHTML = ` 
     <span class="prev" onclick="changeItem(-1)"><i class="fas fa-chevron-left"></i></span>
     <span class="next" onclick="changeItem(1)"><i class="fas fa-chevron-right"></i></span>
     `;
+
 
     sliderContainer.appendChild(prevNext)
     document.querySelector('.main').style.display = 'block';
