@@ -65,3 +65,8 @@ img {
         width: 90%;
     }
 }
+
+#loading-spinner {
+    display: flex;
+    margin: 20px 1px;
+}

@@ -13,7 +13,9 @@ document.getElementById("search")
 
 
 
+
         }
+
 
     });
 
@@ -35,7 +37,10 @@ const showImages = (images) => {
         let div = document.createElement('div');
         div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
         div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-        gallery.appendChild(div)
+        gallery.appendChild(div);
+        toggleSpinner(false);
+
+
 
 
     })
@@ -44,12 +49,16 @@ const showImages = (images) => {
 
 const getImages = (query) => {
     const search = document.getElementById('search').value;
+    toggleSpinner(true);
+
 
     const KEY = '20265029-1a8ac9627f65dc27b61e8e4c2';
     fetch(`https://pixabay.com/api/?key=20265029-1a8ac9627f65dc27b61e8e4c2&q=${search}&image_type=photo&pretty=true`)
         .then(response => response.json())
         .then(data => showImages(data.hits))
         .catch(error => displayError("Something Went wrong"));
+
+
 
 
 }
@@ -155,3 +164,15 @@ searchBtn.addEventListener('click', function() {
 sliderBtn.addEventListener('click', function() {
     createSlider()
 })
+const toggleSpinner = show => {
+    const spinner = document.getElementById('loading-spinner');
+    if (show) {
+        spinner.classList.remove('d-none');
+        spinner.classList.remove('d-flex');
+
+    } else {
+        spinner.classList.add('d-none');
+        spinner.classList.remove('d-flex');
+    }
+
+}
